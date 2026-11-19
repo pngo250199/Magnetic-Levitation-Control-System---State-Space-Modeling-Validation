@@ -16,74 +16,45 @@ This project applies linear systems and state-space control theory to a magnetic
 
 The magnetic force is modeled as:
 
-\[
-F_{\mathrm{mag}}(x,i)=k_m\left(\frac{i}{x}\right)^2
-\]
+<img width="215" height="64" alt="image" src="https://github.com/user-attachments/assets/a8e39dbf-1190-418a-9239-4f7754922167" />
+
 
 Using downward as the positive direction, Newton's second law gives:
 
-\[
-m\ddot{x}=mg-F_{\mathrm{mag}}(x,i)
-\]
+<img width="159" height="33" alt="image" src="https://github.com/user-attachments/assets/02f15ebd-7e6b-4720-8b9b-417d221c41a9" />
+
 
 Therefore, the nonlinear equation is:
 
-\[
-\ddot{x}=g-\frac{k_m}{m}\frac{i^2}{x^2}
-\]
+<img width="131" height="57" alt="image" src="https://github.com/user-attachments/assets/5456c138-6419-40cc-aebd-2f51102eb728" />
+
 
 The system is linearized around the equilibrium operating point:
 
-\[
-X_0=0.05\ \mathrm{m},\qquad I_0=1.0\ \mathrm{A}
-\]
+<img width="194" height="43" alt="image" src="https://github.com/user-attachments/assets/c15596b1-70d6-45b7-a8e2-c976a238252a" />
+
 
 with:
 
-\[
-g=9.81\ \mathrm{m/s^2}
-\]
+<img width="98" height="38" alt="image" src="https://github.com/user-attachments/assets/1ee25907-8c48-4cc8-bab3-8bc9bffa2dfa" />
+
 
 ## Linearized state-space model
 
 The states are:
 
-\[
-\delta x=
-\begin{bmatrix}
-\text{position deviation}\\
-\text{velocity deviation}
-\end{bmatrix}
-\]
+<img width="175" height="53" alt="image" src="https://github.com/user-attachments/assets/9ed09310-8bb3-4f7b-974b-ca4553249745" />
+
 
 The linearized model is:
 
-\[
-\delta\dot{x}=A\delta x+B\delta u
-\]
+<img width="118" height="70" alt="image" src="https://github.com/user-attachments/assets/bf131aa2-388c-4444-88a8-09037936eb06" />
 
-\[
-\delta y=C\delta x+D\delta u
-\]
 
 For the specified operating point:
 
-\[
-A=
-\begin{bmatrix}
-0&1\\
-392.4&0
-\end{bmatrix},\qquad
-B=
-\begin{bmatrix}
-0\\
--19.62
-\end{bmatrix}
-\]
+<img width="254" height="97" alt="image" src="https://github.com/user-attachments/assets/5a1ad484-6545-48e4-be0e-2591587f2606" />
 
-\[
-C=\begin{bmatrix}1&0\end{bmatrix},\qquad D=0
-\]
 
 The output sensor measures position deviation only.
 
@@ -91,21 +62,15 @@ The output sensor measures position deviation only.
 
 The open-loop eigenvalues are:
 
-\[
-\lambda(A)=\pm\sqrt{392.4}\approx\pm19.81
-\]
+<img width="179" height="35" alt="image" src="https://github.com/user-attachments/assets/53d2ea6f-438a-4a89-a7ac-bd35b50541fc" />
+
 
 Because one eigenvalue is positive, the open-loop MagLev system is unstable.
 
 The controllability and observability matrices are:
 
-\[
-\mathcal{C}=\begin{bmatrix}B&AB\end{bmatrix}
-\]
+<img width="110" height="96" alt="image" src="https://github.com/user-attachments/assets/805add02-2a9e-4dc7-8abf-e69fa3248364" />
 
-\[
-\mathcal{O}=\begin{bmatrix}C\\CA\end{bmatrix}
-\]
 
 For this system:
 
@@ -120,31 +85,23 @@ Since the system has two states, it is completely controllable and completely ob
 
 The controller is:
 
-\[
-\delta u=-K\delta x
-\]
+<img width="89" height="31" alt="image" src="https://github.com/user-attachments/assets/c5b0e448-6618-4da2-a07c-7b62eeed1432" />
+
 
 where:
 
-\[
-K=\begin{bmatrix}k_1&k_2\end{bmatrix}
-\]
+<img width="98" height="25" alt="image" src="https://github.com/user-attachments/assets/bb011edb-57a5-4cc0-9fce-13a486eff7ec" />
+
 
 The closed-loop matrix is:
 
-\[
-A_{cl}=A-BK
-\]
+<img width="104" height="31" alt="image" src="https://github.com/user-attachments/assets/3cff796d-390a-4c80-b643-98a60f9e7462" />
+
 
 For desired closed-loop poles \(\lambda_1\) and \(\lambda_2\), the analytical gains are:
 
-\[
-k_2=\frac{\lambda_1+\lambda_2}{19.62}
-\]
+<img width="182" height="104" alt="image" src="https://github.com/user-attachments/assets/7ba86dd9-643f-44b9-be5e-b4cb3b2228b2" />
 
-\[
-k_1=-\frac{392.4+\lambda_1\lambda_2}{19.62}
-\]
 
 The analytical result should be verified using MATLAB's `place` function after the manual derivation.
 
